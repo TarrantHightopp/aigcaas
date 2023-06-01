@@ -24,3 +24,10 @@ type CommonStableDiffusionResponse struct {
 		} `json:"ctx"`
 	} `json:"detail"`
 }
+
+type AsyncRequestIdResponse struct {
+	Status  string `json:"status"`
+	Message string `json:"message"`
+	Help    string `json:"help"`
+	Data    string `json:"data"`
+}
