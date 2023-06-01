@@ -25,10 +25,19 @@ func (c *Client) analog(req *CommonStableDiffusionRequest) (response *http.Respo
 
 // AnalogSync 同步
 func (c *Client) AnalogSync(req *CommonStableDiffusionRequest) (commonStableDiffusionResponse *CommonStableDiffusionResponse, err error) {
-	return c.StableDiffusionSync(req)
+	var response *http.Response
+	if response, err = c.analog(req); err != nil {
+		return nil, err
+	}
+	return c.StableDiffusionSync(response)
 }
 
 // AnalogAsync 异步
 func (c *Client) AnalogAsync(req *CommonStableDiffusionRequest) (string, error) {
-	return c.StableDiffusionAsync(req)
+	var err error
+	var response *http.Response
+	if response, err = c.analog(req); err != nil {
+		return "", err
+	}
+	return c.StableDiffusionAsync(response)
 }

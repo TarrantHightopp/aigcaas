@@ -9,11 +9,7 @@ import (
 // 基于 Stable Diffusion 模型的API公用方法
 
 // StableDiffusionSync 同步
-func (c *Client) StableDiffusionSync(req *CommonStableDiffusionRequest) (commonStableDiffusionResponse *CommonStableDiffusionResponse, err error) {
-	var response *http.Response
-	if response, err = c.analog(req); err != nil {
-		return nil, err
-	}
+func (c *Client) StableDiffusionSync(response *http.Response) (commonStableDiffusionResponse *CommonStableDiffusionResponse, err error) {
 	defer func() {
 		_ = response.Body.Close()
 	}()
@@ -28,12 +24,8 @@ func (c *Client) StableDiffusionSync(req *CommonStableDiffusionRequest) (commonS
 }
 
 // StableDiffusionAsync 异步
-func (c *Client) StableDiffusionAsync(req *CommonStableDiffusionRequest) (string, error) {
+func (c *Client) StableDiffusionAsync(response *http.Response) (string, error) {
 	var err error
-	var response *http.Response
-	if response, err = c.analog(req); err != nil {
-		return "", err
-	}
 	defer func() {
 		_ = response.Body.Close()
 	}()
