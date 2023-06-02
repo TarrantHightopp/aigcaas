@@ -161,3 +161,20 @@ type DCTNetRequest struct {
 	ImageUrl    string `json:"image_url,omitempty"`
 	ImageBase64 string `json:"image_base64,omitempty"`
 }
+
+// Visualglm6bRequest Visualglm6b请求参数
+type Visualglm6bRequest struct {
+	Text    string `json:"text"`
+	History string `json:"history,omitempty"`
+	Image   string `json:"image"`
+}
+
+type Visualglm6bResponse struct {
+	Status  string `json:"status"`
+	Message string `json:"message"`
+	Help    string `json:"help"`
+	Data    struct {
+		Response string     `json:"response"`
+		History  [][]string `json:"history"`
+	} `json:"data"`
+}
