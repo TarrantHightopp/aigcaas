@@ -228,3 +228,24 @@ type RrdbRequest struct {
 	ImageUrl    string `json:"image_url,omitempty"`
 	ImageBase64 string `json:"image_base64,omitempty"`
 }
+
+type Vitgpt2Request struct {
+	ImageUrl    string `json:"image_url,omitempty"`
+	ImageBase64 string `json:"image_base64,omitempty"`
+}
+
+type Vitgpt2Response struct {
+	Status  string `json:"status"`
+	Message string `json:"message"`
+	Data    []struct {
+		GeneratedText string `json:"generated_text"`
+	} `json:"data"`
+	Detail []struct {
+		Loc  []string `json:"loc"`
+		Msg  string   `json:"msg"`
+		Type string   `json:"type"`
+		Ctx  struct {
+			LimitValue int `json:"limit_value"`
+		} `json:"ctx"`
+	} `json:"detail"`
+}
