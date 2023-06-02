@@ -200,3 +200,16 @@ type ParaformerResponse struct {
 		Text string `json:"text"`
 	} `json:"data"`
 }
+
+type CsanmtRequest struct {
+	InputSequence string `json:"input_sequence,omitempty"`
+}
+
+type CsanmtResponse struct {
+	Status  string `json:"status"`
+	Message string `json:"message"`
+	Help    string `json:"help"`
+	Data    struct {
+		Translation string `json:"translation"`
+	} `json:"data"`
+}
