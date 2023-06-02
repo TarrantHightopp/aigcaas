@@ -16,7 +16,7 @@ func TestClient_Visualglm6bAsync(t *testing.T) {
 	}
 	var err error
 	var visualglm6bResponse *Visualglm6bResponse
-	if visualglm6bResponse, err = client.Visualglm6bAsync(visualglm6bRequest); err != nil {
+	if visualglm6bResponse, err = client.Visualglm6bSync(visualglm6bRequest); err != nil {
 		t.Errorf("err --> %v", err)
 	}
 	fmt.Println(visualglm6bResponse)

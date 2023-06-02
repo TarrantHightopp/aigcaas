@@ -8,11 +8,11 @@ import (
 var client = NewClient(`HYOsXaUFOPMZmbY`, `yoZCNgSZeQHLWCp`)
 
 func TestClient_AnalogSync(t *testing.T) {
-	commonStableDiffusionRequest := CommonStableDiffusionRequest{
+	commonStableDiffusionRequest := CommonRequest{
 		Text: "dog",
 	}
 	var err error
-	var commonStableDiffusionResponse *CommonStableDiffusionResponse
+	var commonStableDiffusionResponse *CommonResponse
 	if commonStableDiffusionResponse, err = client.AnalogSync(&commonStableDiffusionRequest); err != nil {
 		t.Errorf("err --> %v", err)
 	}
@@ -21,7 +21,7 @@ func TestClient_AnalogSync(t *testing.T) {
 
 func TestClient_AnalogAsync(t *testing.T) {
 	var err error
-	commonStableDiffusionRequest := CommonStableDiffusionRequest{
+	commonStableDiffusionRequest := CommonRequest{
 		Text: "dog",
 	}
 	client.Mode = Polling

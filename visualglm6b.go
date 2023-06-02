@@ -8,6 +8,7 @@ import (
 )
 
 // VisualGLM-6B 是一个开源的，支持图像、中文和英文的多模态对话语言模型。
+// 只支持 同步调用
 
 var (
 	Visualglm6bApplicationName string = "visualglm6b"
@@ -23,7 +24,7 @@ func (c *Client) visualglm6b(req *Visualglm6bRequest) (response *http.Response, 
 	return c.Send(url, string(byteInfo))
 }
 
-func (c *Client) Visualglm6bAsync(req *Visualglm6bRequest) (*Visualglm6bResponse, error) {
+func (c *Client) Visualglm6bSync(req *Visualglm6bRequest) (*Visualglm6bResponse, error) {
 	var err error
 	var response *http.Response
 	if response, err = c.visualglm6b(req); err != nil {

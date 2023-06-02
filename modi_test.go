@@ -9,11 +9,11 @@ import (
 // 本模型自 Stable Diffusion 1.5 微调而来，微调数据来自某著名动画工作室的电影截图
 
 func TestClient_ModiAsync(t *testing.T) {
-	commonStableDiffusionRequest := CommonStableDiffusionRequest{
+	commonStableDiffusionRequest := CommonRequest{
 		Text: "dog",
 	}
 	var err error
-	var commonStableDiffusionResponse *CommonStableDiffusionResponse
+	var commonStableDiffusionResponse *CommonResponse
 	if commonStableDiffusionResponse, err = client.ModiSync(&commonStableDiffusionRequest); err != nil {
 		t.Errorf("err -> %v", err)
 	}
@@ -22,7 +22,7 @@ func TestClient_ModiAsync(t *testing.T) {
 }
 
 func TestClient_ModiSync(t *testing.T) {
-	commonStableDiffusionRequest := CommonStableDiffusionRequest{
+	commonStableDiffusionRequest := CommonRequest{
 		Text: "dog",
 	}
 	var err error

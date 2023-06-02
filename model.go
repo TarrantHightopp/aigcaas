@@ -187,3 +187,16 @@ type FacefuRequest struct {
 	UserPathBase64     string `json:"user_path_base64"`     // 即将融合头像图片Base64
 	TemplatePathBase64 string `json:"template_path_base64"` // 原图图片Base64
 }
+
+type ParaformerRequest struct {
+	AudioUrl string `json:"audio_url,omitempty"`
+}
+
+type ParaformerResponse struct {
+	Status  string `json:"status"`
+	Message string `json:"message"`
+	Help    string `json:"help"`
+	Data    struct {
+		Text string `json:"text"`
+	} `json:"data"`
+}
