@@ -32,9 +32,10 @@ func (c *Client) AltDiffusionAsync(req *AltDiffusionRequest) (string, error) {
 	if response, err = c.altDiffusion(req); err != nil {
 		return "", err
 	}
-	return c.StableDiffusionAsync(response)
+	return c.Async(response)
 }
 
+// AltDiffusionAsyncRequestId 根据request id 请求模型推理的结果
 func (c *Client) AltDiffusionAsyncRequestId(requestId string) (*AltDiffusionSyncResponse, error) {
 	var err error
 	var request *http.Request

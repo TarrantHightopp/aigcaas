@@ -14,7 +14,7 @@ const (
 	ModiApiName         string = "modi"
 )
 
-func (c *Client) modi(req *CommonStableDiffusionRequest) (response *http.Response, err error) {
+func (c *Client) modi(req *CommonRequest) (response *http.Response, err error) {
 	var byteInfo = make([]byte, 0)
 	if byteInfo, err = json.Marshal(req); err != nil {
 		return nil, err
@@ -24,20 +24,20 @@ func (c *Client) modi(req *CommonStableDiffusionRequest) (response *http.Respons
 }
 
 // ModiSync 同步
-func (c *Client) ModiSync(req *CommonStableDiffusionRequest) (commonStableDiffusionResponse *CommonStableDiffusionResponse, err error) {
+func (c *Client) ModiSync(req *CommonRequest) (commonStableDiffusionResponse *CommonResponse, err error) {
 	var response *http.Response
 	if response, err = c.modi(req); err != nil {
 		return nil, err
 	}
-	return c.StableDiffusionSync(response)
+	return c.Sync(response)
 }
 
 // ModiAsync 异步
-func (c *Client) ModiAsync(req *CommonStableDiffusionRequest) (string, error) {
+func (c *Client) ModiAsync(req *CommonRequest) (string, error) {
 	var err error
 	var response *http.Response
 	if response, err = c.modi(req); err != nil {
 		return "", err
 	}
-	return c.StableDiffusionAsync(response)
+	return c.Async(response)
 }

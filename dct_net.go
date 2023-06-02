@@ -34,11 +34,11 @@ func (c *Client) dctNet(req *DCTNetRequest, apiName string) (response *http.Resp
 }
 
 // DctNetSync 同步调用
-func (c *Client) DctNetSync(req *DCTNetRequest, apiName string) (*CommonStableDiffusionResponse, error) {
+func (c *Client) DctNetSync(req *DCTNetRequest, apiName string) (*CommonResponse, error) {
 	var err error
 	var response *http.Response
 	if response, err = c.dctNet(req, apiName); err != nil {
 		return nil, err
 	}
-	return c.StableDiffusionSync(response)
+	return c.Sync(response)
 }

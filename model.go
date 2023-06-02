@@ -1,7 +1,7 @@
 package aigcaas
 
-// CommonStableDiffusionRequest 共通的StableDiffusion模型请求参数
-type CommonStableDiffusionRequest struct {
+// CommonRequest 共通的StableDiffusion模型请求参数
+type CommonRequest struct {
 	Text              string  `json:"text,omitempty"`                // 内容
 	Height            int     `json:"height,omitempty"`              // 高度
 	Width             int     `json:"width,omitempty"`               // 宽度
@@ -12,8 +12,8 @@ type CommonStableDiffusionRequest struct {
 	Eta               float32 `json:"eta,omitempty"`                 // 噪声种子（取值范围0.0-1.0）
 }
 
-// CommonStableDiffusionResponse 共通的StableDiffusion模型响应参数
-type CommonStableDiffusionResponse struct {
+// CommonResponse 共通的StableDiffusion模型响应参数
+type CommonResponse struct {
 	Status  string `json:"status"`
 	Message string `json:"message"`
 	Data    string `json:"data"`
@@ -169,6 +169,7 @@ type Visualglm6bRequest struct {
 	Image   string `json:"image"`
 }
 
+// Visualglm6bResponse Visualglm6b响应参数
 type Visualglm6bResponse struct {
 	Status  string `json:"status"`
 	Message string `json:"message"`
@@ -177,4 +178,12 @@ type Visualglm6bResponse struct {
 		Response string     `json:"response"`
 		History  [][]string `json:"history"`
 	} `json:"data"`
+}
+
+// FacefuRequest facefu 请求参数
+type FacefuRequest struct {
+	TemplatePathUrl    string `json:"template_path_url"`    // 原图图片地址
+	UserPathUrl        string `json:"user_path_url"`        // 即将融合头像图片地址
+	UserPathBase64     string `json:"user_path_base64"`     // 即将融合头像图片Base64
+	TemplatePathBase64 string `json:"template_path_base64"` // 原图图片Base64
 }

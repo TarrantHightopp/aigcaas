@@ -9,8 +9,8 @@ import (
 
 // 基于 Stable Diffusion 模型的API公用方法
 
-// StableDiffusionSync 同步
-func (c *Client) StableDiffusionSync(response *http.Response) (commonStableDiffusionResponse *CommonStableDiffusionResponse, err error) {
+// Sync 同步
+func (c *Client) Sync(response *http.Response) (commonStableDiffusionResponse *CommonResponse, err error) {
 	defer func() {
 		_ = response.Body.Close()
 	}()
@@ -24,8 +24,8 @@ func (c *Client) StableDiffusionSync(response *http.Response) (commonStableDiffu
 	return commonStableDiffusionResponse, nil
 }
 
-// StableDiffusionAsync 异步
-func (c *Client) StableDiffusionAsync(response *http.Response) (string, error) {
+// Async 异步
+func (c *Client) Async(response *http.Response) (string, error) {
 	var err error
 	defer func() {
 		_ = response.Body.Close()
