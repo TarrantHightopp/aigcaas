@@ -2,6 +2,7 @@ package aigcaas
 
 import (
 	"encoding/json"
+	"fmt"
 	"io"
 	"net/http"
 )
@@ -53,6 +54,7 @@ func (c *Client) AsyncRequestId(requestId string) (*AsyncRequestIdResponse, erro
 	if bodyInfo, err = io.ReadAll(response.Body); err != nil {
 		return nil, err
 	}
+	fmt.Println(string(bodyInfo))
 	var asyncRequestIdResponse AsyncRequestIdResponse
 	if err = json.Unmarshal(bodyInfo, &asyncRequestIdResponse); err != nil {
 		return nil, err
