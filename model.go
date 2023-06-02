@@ -218,3 +218,13 @@ type NafNetRequest struct {
 	ImageUrl    string `json:"image_url,omitempty"`
 	ImageBase64 string `json:"image_base64,omitempty"`
 }
+
+type UhdmRequest struct {
+	ImageUrl    string `json:"image_url,omitempty"`
+	ImageBase64 string `json:"image_base64,omitempty"`
+}
+
+type RrdbRequest struct {
+	ImageUrl    string `json:"image_url,omitempty"`
+	ImageBase64 string `json:"image_base64,omitempty"`
+}
