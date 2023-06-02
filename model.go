@@ -155,3 +155,9 @@ type AltDiffusionSyncInfoResponse struct {
 	ClipSkip                      int           `json:"clip_skip"`
 	IsUsingInpaintingConditioning bool          `json:"is_using_inpainting_conditioning"`
 }
+
+// DCTNetRequest 请求参数
+type DCTNetRequest struct {
+	ImageUrl    string `json:"image_url,omitempty"`
+	ImageBase64 string `json:"image_base64,omitempty"`
+}

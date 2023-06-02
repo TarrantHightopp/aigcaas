@@ -36,7 +36,7 @@ func TestClient_AnalogAsync(t *testing.T) {
 func TestClient_AsyncRequestId(t *testing.T) {
 	var err error
 	var resp *AsyncRequestIdResponse
-	if resp, err = client.AsyncRequestId(`3aa771a2-dfc2-4996-8b5b-776c86cd3384`); err != nil {
+	if resp, err = client.AsyncRequestId(`47CE03F2-0A1E-59DF-B7E6-963903FE0BB9`); err != nil {
 		t.Errorf("err --> %v", err)
 	}
 	fmt.Println("message --> ", resp.Message)
