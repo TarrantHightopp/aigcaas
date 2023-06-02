@@ -213,3 +213,8 @@ type CsanmtResponse struct {
 		Translation string `json:"translation"`
 	} `json:"data"`
 }
+
+type NafNetRequest struct {
+	ImageUrl    string `json:"image_url,omitempty"`
+	ImageBase64 string `json:"image_base64,omitempty"`
+}
