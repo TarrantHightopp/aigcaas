@@ -249,3 +249,10 @@ type Vitgpt2Response struct {
 		} `json:"ctx"`
 	} `json:"detail"`
 }
+
+type OrcRequest struct {
+	ImageBase64 string `json:"image_base_64,omitempty"`
+	Lang        string `json:"lang,omitempty"`
+	UseAngleCls string `json:"use_angle_cls,omitempty"`
+	ImageUrl    string `json:"image_url,omitempty"`
+}
