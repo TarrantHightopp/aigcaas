@@ -44,10 +44,15 @@ func (c *Client) InitRequest(request *http.Request) {
 	request.Header.Add("Content-Type", "application/json")
 }
 
-func (c *Client) Send(url, body string) (*http.Response, error) {
+// Send 发送请求
+func (c *Client) Send(url string, bodyInfo interface{}) (*http.Response, error) {
 	var err error
 	var request *http.Request
-	if request, err = http.NewRequest("POST", url, strings.NewReader(body)); err != nil {
+	var bodyByte = make([]byte, 0)
+	if bodyByte, err = json.Marshal(bodyInfo); err != nil {
+		return nil, err
+	}
+	if request, err = http.NewRequest("POST", url, strings.NewReader(string(bodyByte))); err != nil {
 		return nil, err
 	}
 	c.InitRequest(request)
@@ -62,6 +67,7 @@ func (c *Client) Send(url, body string) (*http.Response, error) {
 	return client.Do(request)
 }
 
+// AsyncRequestId 获取异步请求的结果
 func (c *Client) AsyncRequestId(requestId string) (*http.Response, error) {
 	var err error
 	var request *http.Request
@@ -80,8 +86,8 @@ func (c *Client) AsyncRequestId(requestId string) (*http.Response, error) {
 
 func (c *Client) ReadResponseBody(data interface{}, response *http.Response) (err error) {
 	var body = make([]byte, 0)
+
 	if body, err = io.ReadAll(response.Body); err != nil {
-		fmt.Println("read err --> ", err)
 		return err
 	}
 	fmt.Println(string(body))

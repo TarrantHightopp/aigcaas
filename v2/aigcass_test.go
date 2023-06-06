@@ -13,6 +13,7 @@ import (
 var client = NewClient(`HYOsXaUFOPMZmbY`, `yoZCNgSZeQHLWCp`)
 
 func TestClient_CetusMix(t *testing.T) {
+	client.ApiName = ApiNameTEXT2IMG
 	req := &CommonRequest{Prompt: "1girl,death,reaper,weapon"}
 	var res *CommonResponse
 	var err error
@@ -20,7 +21,8 @@ func TestClient_CetusMix(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	fmt.Println(res.AigcaasRequestId)
+	fmt.Println("request id --> ", res.AigcaasRequestId)
+	fmt.Println("res --> ", res)
 	// 49cd820a-34a1-4686-9498-d3bb3bacfcf6
 }
 

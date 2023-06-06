@@ -1,5 +1,6 @@
 package aigcaas
 
+// CommonRequest 通用的请求参数
 type CommonRequest struct {
 	EnableHr                          bool          `json:"enable_hr,,omitempty"`
 	DenoisingStrength                 int           `json:"denoising_strength,,omitempty"`
@@ -48,18 +49,22 @@ type CommonRequest struct {
 	AlwaysonScripts                   struct{}      `json:"alwayson_scripts,,omitempty"`
 }
 
+// CommonResponse 通用的响应参数
+// 主要：请求成功只会响应 Aigcaas-Request-Id 参数
 type CommonResponse struct {
 	AigcaasRequestId string `json:"Aigcaas-Request-Id"`
-	Status           string `json:"status"`
-	Message          string `json:"message"`
-	Help             string `json:"help"`
+	ErrorCommonResponse
+}
+
+// ErrorCommonResponse 通用的错误响应参数
+type ErrorCommonResponse struct {
+	Error   string `json:"error"`
+	Message string `json:"message"`
+	Help    string `json:"help"`
 }
 
 // AsyncResponse 请求结果的响应参数
 type AsyncResponse struct {
-	Error      string   `json:"error"`
-	Message    string   `json:"message"`
-	Help       string   `json:"help"`
 	Images     []string `json:"images"`
 	Parameters struct {
 		EnableHr          bool        `json:"enable_hr"`
@@ -111,6 +116,7 @@ type AsyncResponse struct {
 		} `json:"alwayson_scripts"`
 	} `json:"parameters"`
 	Info string `json:"info"`
+	ErrorCommonResponse
 }
 
 // AsyncInfoResponse info响应参数
