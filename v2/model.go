@@ -1,7 +1,7 @@
 package aigcaas
 
-// CommonRequest 通用的请求参数
-type CommonRequest struct {
+// CommonText2ImgRequest  文生图通用的请求参数
+type CommonText2ImgRequest struct {
 	EnableHr                          bool          `json:"enable_hr,,omitempty"`
 	DenoisingStrength                 int           `json:"denoising_strength,,omitempty"`
 	FirstphaseWidth                   int           `json:"firstphase_width,,omitempty"`
@@ -47,6 +47,55 @@ type CommonRequest struct {
 	SendImages                        bool          `json:"send_images,,omitempty"`
 	SaveImages                        bool          `json:"save_images,,omitempty"`
 	AlwaysonScripts                   struct{}      `json:"alwayson_scripts,,omitempty"`
+}
+
+// CommonImg2imgRequest 图生图
+type CommonImg2imgRequest struct {
+	InitImages                        []string      `json:"init_images"`
+	ResizeMode                        int           `json:"resize_mode"`
+	DenoisingStrength                 float64       `json:"denoising_strength"`
+	ImageCfgScale                     int           `json:"image_cfg_scale"`
+	Mask                              string        `json:"mask"`
+	MaskBlur                          int           `json:"mask_blur"`
+	InpaintingFill                    int           `json:"inpainting_fill"`
+	InpaintFullRes                    bool          `json:"inpaint_full_res"`
+	InpaintFullResPadding             int           `json:"inpaint_full_res_padding"`
+	InpaintingMaskInvert              int           `json:"inpainting_mask_invert"`
+	InitialNoiseMultiplier            int           `json:"initial_noise_multiplier"`
+	Prompt                            string        `json:"prompt"`
+	Styles                            []string      `json:"styles"`
+	Seed                              int           `json:"seed"`
+	Subseed                           int           `json:"subseed"`
+	SubseedStrength                   int           `json:"subseed_strength"`
+	SeedResizeFromH                   int           `json:"seed_resize_from_h"`
+	SeedResizeFromW                   int           `json:"seed_resize_from_w"`
+	SamplerName                       string        `json:"sampler_name"`
+	BatchSize                         int           `json:"batch_size"`
+	NIter                             int           `json:"n_iter"`
+	Steps                             int           `json:"steps"`
+	CfgScale                          int           `json:"cfg_scale"`
+	Width                             int           `json:"width"`
+	Height                            int           `json:"height"`
+	RestoreFaces                      bool          `json:"restore_faces"`
+	Tiling                            bool          `json:"tiling"`
+	DoNotSaveSamples                  bool          `json:"do_not_save_samples"`
+	DoNotSaveGrid                     bool          `json:"do_not_save_grid"`
+	NegativePrompt                    string        `json:"negative_prompt"`
+	Eta                               int           `json:"eta"`
+	SMinUncond                        int           `json:"s_min_uncond"`
+	SChurn                            int           `json:"s_churn"`
+	STmax                             int           `json:"s_tmax"`
+	STmin                             int           `json:"s_tmin"`
+	SNoise                            int           `json:"s_noise"`
+	OverrideSettings                  struct{}      `json:"override_settings"`
+	OverrideSettingsRestoreAfterwards bool          `json:"override_settings_restore_afterwards"`
+	ScriptArgs                        []interface{} `json:"script_args"`
+	SamplerIndex                      string        `json:"sampler_index"`
+	IncludeInitImages                 bool          `json:"include_init_images"`
+	ScriptName                        string        `json:"script_name"`
+	SendImages                        bool          `json:"send_images"`
+	SaveImages                        bool          `json:"save_images"`
+	AlwaysonScripts                   struct{}      `json:"alwayson_scripts"`
 }
 
 // CommonResponse 通用的响应参数

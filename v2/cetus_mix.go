@@ -11,10 +11,10 @@ import (
 
 const CetusMixApplicationName = `cetusMix_v4`
 
-func (c *Client) CetusMix(commonRequest *CommonRequest) (commonResponse *CommonResponse, err error) {
+func (c *Client) cetusMix(req interface{}) (commonResponse *CommonResponse, err error) {
 	var url = fmt.Sprintf("%s/%s/api/%s", URL, CetusMixApplicationName, c.ApiName)
 	var response *http.Response
-	if response, err = c.Send(url, commonRequest); err != nil {
+	if response, err = c.Send(url, req); err != nil {
 		return nil, err
 	}
 	defer func() {
@@ -24,4 +24,12 @@ func (c *Client) CetusMix(commonRequest *CommonRequest) (commonResponse *CommonR
 		return nil, err
 	}
 	return commonResponse, nil
+}
+
+func (c *Client) CetusMixText2Img(commonText2ImgRequest *CommonText2ImgRequest) (commonResponse *CommonResponse, err error) {
+	return c.cetusMix(commonText2ImgRequest)
+}
+
+func (c *Client) CetusMixImg2Img(commonImg2imgRequest *CommonImg2imgRequest) (commonResponse *CommonResponse, err error) {
+	return c.cetusMix(commonImg2imgRequest)
 }

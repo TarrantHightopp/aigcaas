@@ -16,8 +16,8 @@ import (
 type Client struct {
 	SecretKey   string `json:"secret_key"`
 	SecretId    string `json:"secret_id"`
-	Mode        int    `json:"mode"`
-	CallbackUrl string `json:"callback_url"`
+	Mode        int    `json:"mode"`         // 轮训模式|通知模式|默认
+	CallbackUrl string `json:"callback_url"` // 回掉地址
 	ApiName     string `json:"api_name"`
 }
 

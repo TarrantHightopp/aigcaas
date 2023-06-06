@@ -14,10 +14,11 @@ var client = NewClient(`HYOsXaUFOPMZmbY`, `yoZCNgSZeQHLWCp`)
 
 func TestClient_CetusMix(t *testing.T) {
 	client.ApiName = ApiNameTEXT2IMG
-	req := &CommonRequest{Prompt: "1girl,death,reaper,weapon"}
+	client.Mode = Polling
+	req := &CommonText2ImgRequest{Prompt: "1girl,death,reaper,weapon"}
 	var res *CommonResponse
 	var err error
-	res, err = client.CetusMix(req)
+	res, err = client.CetusMixText2Img(req)
 	if err != nil {
 		t.Error(err)
 	}
