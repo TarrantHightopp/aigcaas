@@ -49,8 +49,8 @@ type CommonText2ImgRequest struct {
 	AlwaysonScripts                   struct{}      `json:"alwayson_scripts,,omitempty"`
 }
 
-// CommonImg2imgRequest 图生图
-type CommonImg2imgRequest struct {
+// CommonImg2ImgRequest 图生图
+type CommonImg2ImgRequest struct {
 	InitImages                        []string      `json:"init_images"`
 	ResizeMode                        int           `json:"resize_mode"`
 	DenoisingStrength                 float64       `json:"denoising_strength"`

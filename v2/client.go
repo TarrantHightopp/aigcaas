@@ -2,12 +2,14 @@ package aigcaas
 
 import (
 	"crypto/sha256"
+	"encoding/base64"
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
 	"io"
 	"math/rand"
 	"net/http"
+	"os"
 	"strconv"
 	"strings"
 	"time"
@@ -84,12 +86,40 @@ func (c *Client) AsyncRequestId(requestId string) (*http.Response, error) {
 	return response, err
 }
 
+// ReadResponseBody 读取响应体并序列化
 func (c *Client) ReadResponseBody(data interface{}, response *http.Response) (err error) {
 	var body = make([]byte, 0)
-
 	if body, err = io.ReadAll(response.Body); err != nil {
 		return err
 	}
 	fmt.Println(string(body))
 	return json.Unmarshal(body, &data)
+}
+
+// Base642ImageFile 将base64转成图片文件
+// base64Str base字符串
+// 保存地址
+func (c *Client) Base642ImageFile(base64Str, path string) (err error) {
+	var byteInfo = make([]byte, 0)
+	if byteInfo, err = base64.StdEncoding.DecodeString(base64Str); err != nil {
+		return err
+	}
+	return os.WriteFile(path, byteInfo, 0666)
+}
+
+// ImageFile2Base64 将文件图片转成base64
+// path 本地图片地路径
+func (c *Client) ImageFile2Base64(path string) (result string, err error) {
+	var file *os.File
+	if file, err = os.Open(path); err != nil {
+		return "", err
+	}
+	defer func() {
+		_ = file.Close()
+	}()
+	var byteInfo = make([]byte, 0)
+	if byteInfo, err = io.ReadAll(file); err != nil {
+		return "", err
+	}
+	return base64.StdEncoding.EncodeToString(byteInfo), err
 }

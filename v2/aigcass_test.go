@@ -3,6 +3,7 @@ package aigcaas
 import (
 	"encoding/base64"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"net/http"
@@ -52,4 +53,19 @@ func TestClient_AsyncRequestId(t *testing.T) {
 	if err != nil {
 		panic(err)
 	}
+}
+func TestImageFileToBase64(t *testing.T) {
+	//获取本地文件
+	file, err := os.Open("./output.jpg")
+	if err != nil {
+		err = errors.New("获取本地图片失败")
+		return
+	}
+	defer file.Close()
+	imgByte, _ := io.ReadAll(file)
+
+	// 判断文件类型，生成一个前缀，拼接base64后可以直接粘贴到浏览器打开，不需要可以不用下面代码
+	//取图片类型
+	result := base64.StdEncoding.EncodeToString(imgByte)
+	fmt.Println(result)
 }

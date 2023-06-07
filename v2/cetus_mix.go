@@ -27,9 +27,11 @@ func (c *Client) cetusMix(req interface{}) (commonResponse *CommonResponse, err 
 }
 
 func (c *Client) CetusMixText2Img(commonText2ImgRequest *CommonText2ImgRequest) (commonResponse *CommonResponse, err error) {
+	c.ApiName = ApiNameTEXT2IMG
 	return c.cetusMix(commonText2ImgRequest)
 }
 
-func (c *Client) CetusMixImg2Img(commonImg2imgRequest *CommonImg2imgRequest) (commonResponse *CommonResponse, err error) {
-	return c.cetusMix(commonImg2imgRequest)
+func (c *Client) CetusMixImg2Img(commonImg2ImgRequest *CommonImg2ImgRequest) (commonResponse *CommonResponse, err error) {
+	c.ApiName = ApiNameIMG2IMG
+	return c.cetusMix(commonImg2ImgRequest)
 }
