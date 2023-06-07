@@ -4,13 +4,13 @@
 source_file="template"
 
 # 目标文件路径
-target_file="../v2/realisian.go"
+target_file="../v2/dream_shaper.go"
 
 # 参数替换
-model_name="Realisian"
-func_name_up="Realisian"
-func_name="realisian"
-model_name_application_name="realisian_v40"
+model_name="DreamShaper"
+func_name_up="DreamShaper"
+func_name="dreamShaper"
+model_name_application_name="dreamshaper_6BakedVae"
 
 # 复制文件并替换参数
 cp "$source_file" "$target_file"
