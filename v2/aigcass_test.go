@@ -3,7 +3,6 @@ package aigcaas
 import (
 	"encoding/base64"
 	"encoding/json"
-	"errors"
 	"fmt"
 	"io"
 	"net/http"
@@ -31,7 +30,7 @@ func TestClient_CetusMix(t *testing.T) {
 func TestClient_AsyncRequestId(t *testing.T) {
 	var response *http.Response
 	var err error
-	if response, err = client.AsyncRequestId(`49cd820a-34a1-4686-9498-d3bb3bacfcf6`); err != nil {
+	if response, err = client.AsyncRequestId(`5a8f69e8-8c40-4060-83da-486a7fbec3d3`); err != nil {
 		panic(err)
 	}
 	var res AsyncResponse
@@ -49,23 +48,39 @@ func TestClient_AsyncRequestId(t *testing.T) {
 	}
 
 	ddd, _ := base64.StdEncoding.DecodeString(res.Images[0]) //成图片文件并把文件写入到buffer
-	err = os.WriteFile("./output.jpg", ddd, 0666)            //buffer输出到jpg文件中（不做处理，直接写到文件）
+	err = os.WriteFile("./guofeng.jpg", ddd, 0666)           //buffer输出到jpg文件中（不做处理，直接写到文件）
 	if err != nil {
 		panic(err)
 	}
 }
-func TestImageFileToBase64(t *testing.T) {
-	//获取本地文件
-	file, err := os.Open("./output.jpg")
-	if err != nil {
-		err = errors.New("获取本地图片失败")
-		return
-	}
-	defer file.Close()
-	imgByte, _ := io.ReadAll(file)
 
-	// 判断文件类型，生成一个前缀，拼接base64后可以直接粘贴到浏览器打开，不需要可以不用下面代码
-	//取图片类型
-	result := base64.StdEncoding.EncodeToString(imgByte)
-	fmt.Println(result)
+func TestClient_DarkSushiMixText2Img(t *testing.T) {
+	req := &CommonText2ImgRequest{Prompt: "1girl, (colorful),(finely detailed beautiful eyes and detailed face),cinematic lighting,bust shot,extremely detailed CG unity 8k wallpaper,white hair,solo,smile,intricate skirt,((flying petal)),(Flowery meadow)\nsky, cloudy_sky, building, moonlight, moon, night, (dark theme:1.3), light, fantasy", Seed: 248131369}
+	var res *CommonResponse
+	var err error
+	res, err = client.DarkSushiMixText2Img(req)
+	if err != nil {
+		t.Error(err)
+	}
+	fmt.Println("request id --> ", res.AigcaasRequestId)
+	fmt.Println("res --> ", res)
+}
+
+func TestClient_GuoFeng3Text2Img(t *testing.T) {
+	req := &CommonText2ImgRequest{
+		Prompt:         "best quality, masterpiece, highres, 1girl,blush,(seductive smile:0.8),star-shaped pupils,china hanfu,hair ornament,necklace, jewelry,Beautiful face,upon_body, tyndall effect,photorealistic, dark studio, rim lighting, two tone lighting,(high detailed skin:1.2), 8k uhd, dslr, soft lighting, high quality, volumetric lighting, candid, Photograph, high resolution, 4k, 8k, Bokeh",
+		Seed:           3556647833,
+		Steps:          30,
+		SamplerName:    "Euler a",
+		CfgScale:       9,
+		NegativePrompt: `(((simple background))),monochrome ,lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark, username, blurry, lowres, bad anatomy, bad hands, text, error, extra digit, fewer digits, cropped, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark, username, blurry, ugly,pregnant,vore,duplicate,morbid,mut ilated,tran nsexual, hermaphrodite,long neck,mutated hands,poorly drawn hands,poorly drawn face,mutation,deformed,blurry,bad anatomy,bad proportions,malformed limbs,extra limbs,cloned face,disfigured,gross proportions, (((missing arms))),(((missing legs))), (((extra arms))),(((extra legs))),pubic hair, plump,bad legs,error legs,username,blurry,bad fee`,
+	}
+	var res *CommonResponse
+	var err error
+	res, err = client.GuoFeng3Text2Img(req)
+	if err != nil {
+		t.Error(err)
+	}
+	fmt.Println("request id --> ", res.AigcaasRequestId)
+	fmt.Println("res --> ", res)
 }
