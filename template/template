@@ -1,0 +1,33 @@
+package aigcaas
+
+import (
+	"fmt"
+	"net/http"
+)
+
+const {model_name}ApplicationName = `{model_name_application_name}`
+
+func (c *Client) {func_name}(req interface{}) (commonResponse *CommonResponse, err error) {
+	var url = fmt.Sprintf("%s/%s/api/%s", URL, {model_name}ApplicationName, c.ApiName)
+	var response *http.Response
+	if response, err = c.Send(url, req); err != nil {
+		return nil, err
+	}
+	defer func() {
+		_ = response.Body.Close()
+	}()
+	if err = c.ReadResponseBody(&commonResponse, response); err != nil {
+		return nil, err
+	}
+	return commonResponse, nil
+}
+
+func (c *Client) {func_name_up}Text2Img(commonText2ImgRequest *CommonText2ImgRequest) (commonResponse *CommonResponse, err error) {
+	c.ApiName = ApiNameTEXT2IMG
+	return c.{func_name}(commonText2ImgRequest)
+}
+
+func (c *Client) {func_name_up}Img2Img(commonImg2ImgRequest *CommonImg2ImgRequest) (commonResponse *CommonResponse, err error) {
+	c.ApiName = ApiNameIMG2IMG
+	return c.{func_name}(commonImg2ImgRequest)
+}
