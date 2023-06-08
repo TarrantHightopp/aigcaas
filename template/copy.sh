@@ -4,13 +4,13 @@
 source_file="template"
 
 # 目标文件路径
-target_file="../v2/dream_shaper.go"
+target_file="../v2/protogen.go"
 
 # 参数替换
-model_name="DreamShaper"
-func_name_up="DreamShaper"
-func_name="dreamShaper"
-model_name_application_name="dreamshaper_6BakedVae"
+model_name="Protogen"
+func_name_up="Protogen"
+func_name="protogen"
+model_name_application_name="protogenV22Anime_protogenV22"
 
 # 复制文件并替换参数
 cp "$source_file" "$target_file"

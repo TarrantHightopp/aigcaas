@@ -30,7 +30,7 @@ func TestClient_CetusMix(t *testing.T) {
 func TestClient_AsyncRequestId(t *testing.T) {
 	var response *http.Response
 	var err error
-	if response, err = client.AsyncRequestId(`5a8f69e8-8c40-4060-83da-486a7fbec3d3`); err != nil {
+	if response, err = client.AsyncRequestId(`78f4d20f-2468-4a14-91ea-5c3bd909e9d0`); err != nil {
 		panic(err)
 	}
 	var res AsyncResponse
@@ -48,7 +48,7 @@ func TestClient_AsyncRequestId(t *testing.T) {
 	}
 
 	ddd, _ := base64.StdEncoding.DecodeString(res.Images[0]) //成图片文件并把文件写入到buffer
-	err = os.WriteFile("./guofeng.jpg", ddd, 0666)           //buffer输出到jpg文件中（不做处理，直接写到文件）
+	err = os.WriteFile("./Meinamix.jpg", ddd, 0666)          //buffer输出到jpg文件中（不做处理，直接写到文件）
 	if err != nil {
 		panic(err)
 	}
@@ -78,6 +78,22 @@ func TestClient_GuoFeng3Text2Img(t *testing.T) {
 	var res *CommonResponse
 	var err error
 	res, err = client.GuoFeng3Text2Img(req)
+	if err != nil {
+		t.Error(err)
+	}
+	fmt.Println("request id --> ", res.AigcaasRequestId)
+	fmt.Println("res --> ", res)
+}
+
+func TestClient_MeinamixText2Img(t *testing.T) {
+	req := &CommonText2ImgRequest{
+		Prompt:         "RAW photo, (close up photo:1.2) of gigachad, wearing shorts, posing for the camera,in times square, (solo:1.1), 8k uhd, dslr, high quality, film grain, Fujifilm XT3 <lora:Gigachadv1:0.7>",
+		NegativePrompt: "(deformed iris, deformed pupils, semi-realistic, cgi, 3d, render, sketch, cartoon, drawing, anime:1.4), text, close up, cropped, out of frame, worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated, extra fingers, mutated hands, poorly drawn hands, poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions, extra limbs, cloned face, disfigured, gross proportions, malformed limbs, missing arms, missing legs, extra arms, extra legs, fused fingers, too many fingers, long neck",
+		SamplerIndex:   "DPM++ 2M Karras",
+	}
+	var res *CommonResponse
+	var err error
+	res, err = client.ProtogenText2Img(req)
 	if err != nil {
 		t.Error(err)
 	}

@@ -123,3 +123,18 @@ func (c *Client) ImageFile2Base64(path string) (result string, err error) {
 	}
 	return base64.StdEncoding.EncodeToString(byteInfo), err
 }
+
+// CommonSend 通用请求
+func (c *Client) CommonSend(req interface{}, url string, mode string) (response *http.Response, err error) {
+	var request *http.Request
+	var bodyByte = make([]byte, 0)
+	if bodyByte, err = json.Marshal(req); err != nil {
+		return nil, err
+	}
+	if request, err = http.NewRequest("POST", url, strings.NewReader(string(bodyByte))); err != nil {
+		return nil, err
+	}
+	c.InitRequest(request)
+	var client = http.Client{}
+	return client.Do(request)
+}
