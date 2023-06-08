@@ -30,7 +30,7 @@ func TestClient_CetusMix(t *testing.T) {
 func TestClient_AsyncRequestId(t *testing.T) {
 	var response *http.Response
 	var err error
-	if response, err = client.AsyncRequestId(`78f4d20f-2468-4a14-91ea-5c3bd909e9d0`); err != nil {
+	if response, err = client.AsyncRequestId(`1a933b97-ecc2-4e96-bcfb-c2e8389d7220`); err != nil {
 		panic(err)
 	}
 	var res AsyncResponse
@@ -43,12 +43,17 @@ func TestClient_AsyncRequestId(t *testing.T) {
 		panic(err)
 	}
 
+	fmt.Println("body --> ", string(byteInfo))
+	for s, strings := range response.Header {
+		fmt.Println(s, " --> ", strings)
+	}
 	if res.Error != "" {
 		t.Error("err --> ", res.Error)
+		return
 	}
 
 	ddd, _ := base64.StdEncoding.DecodeString(res.Images[0]) //成图片文件并把文件写入到buffer
-	err = os.WriteFile("./Meinamix.jpg", ddd, 0666)          //buffer输出到jpg文件中（不做处理，直接写到文件）
+	err = os.WriteFile("./Meinamix1.jpg", ddd, 0666)         //buffer输出到jpg文件中（不做处理，直接写到文件）
 	if err != nil {
 		panic(err)
 	}
@@ -99,4 +104,23 @@ func TestClient_MeinamixText2Img(t *testing.T) {
 	}
 	fmt.Println("request id --> ", res.AigcaasRequestId)
 	fmt.Println("res --> ", res)
+}
+
+func TestTestClient_MeinamixImg2Img(t *testing.T) {
+	var err error
+	var base64Info string
+	base64Info, err = client.ImageFile2Base64("./Meinamix.jpg")
+	if err != nil {
+		t.Error("err --> ", err)
+	}
+	fmt.Println(base64Info)
+
+	req := CommonImg2ImgRequest{InitImages: []string{base64Info}}
+	var resp *CommonResponse
+	resp, err = client.ProtogenImg2Img(&req)
+	if err != nil {
+		t.Error(err)
+	}
+	fmt.Println("request id --> ", resp.AigcaasRequestId)
+	fmt.Println("res --> ", resp)
 }
