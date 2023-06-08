@@ -124,3 +124,7 @@ func TestTestClient_MeinamixImg2Img(t *testing.T) {
 	fmt.Println("request id --> ", resp.AigcaasRequestId)
 	fmt.Println("res --> ", resp)
 }
+
+func TestInfo(t *testing.T) {
+	fmt.Println("git test")
+}
