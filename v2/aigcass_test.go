@@ -126,5 +126,5 @@ func TestTestClient_MeinamixImg2Img(t *testing.T) {
 }
 
 func TestInfo(t *testing.T) {
-	fmt.Println("git test")
+	fmt.Println("fix info")
 }
